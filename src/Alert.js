@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 function Alert(props) {
   const { alert, remove,list } = props
   useEffect(() => {
-    const timeout = setTimeout(() => {
+    setTimeout(() => {
       remove();
     }, 3000);
     
