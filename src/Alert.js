@@ -1,19 +1,12 @@
-import React, { useEffect } from 'react'
+import React from "react";
 
-function Alert(props) {
-  const { alert, remove,list } = props
-  useEffect(() => {
-    setTimeout(() => {
-      remove();
-    }, 3000);
-    
-  }, [list]);
+const Alert = ({ type, message, removeAlert, list }) => {
+  
 
   return (
     // use backticks!
-    <p className={`alert alert-${alert.type}`}>{alert.message}</p>
-    
-  )
-}
+    <p className={`alert alert-${type}`}>{message}</p>
+  );
+};
 
-export default Alert
+export default Alert;

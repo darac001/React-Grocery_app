@@ -22,10 +22,6 @@ function App() {
   // console.log(name);
   // console.log(list);
 
-  useEffect(() => {
-    localStorage.setItem("list", JSON.stringify(list));
-  }, [list]);
-
   const showAlert = (show = false, type = "", message = "") => {
     setAlert({ show, type, message });
   };
@@ -57,6 +53,13 @@ function App() {
       setName("");
     }
   };
+  useEffect(() => {
+    localStorage.setItem("list", JSON.stringify(list));
+    const timeout = setTimeout(() => {
+      showAlert();
+    }, 3000);
+    return () => clearTimeout(timeout);
+  }, [list]);
   return (
     <section className="section-center">
       <div className="grocery-form">
@@ -65,7 +68,9 @@ function App() {
         </div>
         <Form onSubmit={handleSubmit} className="form">
           {/* show alert only if true, add useffect to Alert component with settimeout function to remove the alert */}
-          {alert.show && <Alert alert={alert} remove={showAlert} list={list} />}
+          {alert.show && (
+            <Alert {...alert} removeAlert={showAlert} list={list} />
+          )}
           <Form.Group className="mb-3 input-box">
             <Form.Control
               type="text"
